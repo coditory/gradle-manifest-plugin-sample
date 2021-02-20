@@ -1,11 +1,12 @@
 package com.coditory.sandbox;
 
+import java.util.Map;
 import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 
 class Application {
     public static void main(String[] args) {
-        Manifest manifest = ManifestReader.loadManifestWithTitle("gradle-manifest-plugin-sample-single");
+        Map<String, String> manifest = ManifestReader.loadManifestMapWithTitle("gradle-manifest-plugin-sample-single");
         if (manifest == null) {
             System.out.println("Manifest not found");
         } else {
@@ -13,8 +14,8 @@ class Application {
         }
     }
 
-    private static String toString(Manifest manifest) {
-        return manifest.getMainAttributes().entrySet()
+    private static String toString(Map<String, String> manifest) {
+        return manifest.entrySet()
                 .stream()
                 .map(it -> it.getKey() + ": " + it.getValue())
                 .collect(Collectors.joining("\n"));

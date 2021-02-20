@@ -4,15 +4,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.jar.Manifest;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
 import static java.util.jar.Attributes.Name.IMPLEMENTATION_TITLE;
 
 class ManifestReader {
     private static final ManifestReader INSTANCE = new ManifestReader();
+
+    public static Map<String, String> loadManifestMapWithTitle(String title) {
+        return INSTANCE.readManifestMapWithTitle(title);
+    }
 
     public static Manifest loadManifestWithTitle(String title) {
         return INSTANCE.readManifestWithTitle(title);
@@ -28,6 +34,16 @@ class ManifestReader {
     public ManifestReader(ClassLoader classloader) {
         requireNonNull(classloader);
         this.classloader = classloader;
+    }
+
+    public Map<String, String> readManifestMapWithTitle(String title) {
+        requireNonNull(title);
+        Manifest manifest = readManifestWithProperty(IMPLEMENTATION_TITLE.toString(), title);
+        if (manifest == null) {
+            return null;
+        }
+        return manifest.getMainAttributes().entrySet().stream()
+                .collect(Collectors.toMap(it -> it.getKey().toString(), it -> it.getValue().toString()));
     }
 
     public Manifest readManifestWithTitle(String title) {
