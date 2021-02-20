@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 class Application {
     public static void main(String[] args) {
-        Map<String, String> manifest = ManifestReader.loadManifestMapWithTitle("gradle-manifest-plugin-sample-single");
+        Map<String, String> manifest = ManifestReader.loadManifestMapWithTitle("gradle-manifest-plugin-sample");
         if (manifest == null) {
             System.out.println("Manifest not found");
         } else {

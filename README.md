@@ -6,6 +6,6 @@ This project presents how to use [gradle-manifest-plugin](https://github.com/cod
 and how to read it in runtime.
 
 Relevant files:
-- [build.gradle](/build.gradle) - add gradle-manifest-plugin to the project
+- [build.gradle](/build.gradle.kts) - add gradle-manifest-plugin to the project
 - [ManifestReader.java](/src/main/java/com/coditory/sandbox/ManifestReader.java) - reads project's MANIFEST.MF file by implementation title
 - [Application.java](/src/main/java/com/coditory/sandbox/Application.java) - prints out the content of MANIFEST.MF
