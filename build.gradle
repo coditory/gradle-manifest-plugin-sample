@@ -1,15 +1,21 @@
 plugins {
-    id 'java'
-    id 'groovy'
-    id 'com.coditory.manifest' version '0.1.12'
+    id "java"
+    id "groovy"
+    id "com.coditory.manifest" version "0.2.4"
 }
 
 repositories {
     mavenCentral()
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
+}
+
 dependencies {
-    testImplementation 'org.spockframework:spock-core:2.0-M4-groovy-3.0'
+    testImplementation "org.spockframework:spock-core:2.0-M4-groovy-3.0"
 }
 
 test {
